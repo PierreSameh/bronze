@@ -52,4 +52,8 @@ class Product extends Model
     public function info(){
         return $this->hasMany(ProductInfo::class);
     }
+
+    public function cart(){
+        return $this->hasMany(Cart::class);
+    }
 }

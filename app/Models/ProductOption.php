@@ -19,4 +19,8 @@ class ProductOption extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function cartOptions(){
+        return $this->hasMany(CartOption::class);
+    }
 }

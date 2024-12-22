@@ -17,9 +17,9 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => ['required','string','max:255'],
             'last_name' => ['required','string','max:255'],
-            'email' => ['required_unless:joined_with,3','email','unique:users,email'],
-            'phone' => ['required_if:joined_with,1',
-            'string','numeric','digits:11','unique:users,phone'],
+            'email' => ['required','email','unique:users,email'],
+            'phone' => ['required',
+            'string','numeric','unique:users,phone'],
             'password' => ['required_if:joined_with,1',
             'string','min:8',
             'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]+$/u',
