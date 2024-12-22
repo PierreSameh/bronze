@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\AddressController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\WishlistController;
@@ -32,5 +33,7 @@ Route::prefix('user')->group(function () {
         Route::put('/cart/{id}', [CartController::class, 'update']);
         Route::delete('/cart/{id}', [CartController::class, 'destroy']);
         Route::delete('/cart', [CartController::class, 'clear']);
+        //Addresses
+        Route::apiResource('addresses', AddressController::class);
     });
 });
