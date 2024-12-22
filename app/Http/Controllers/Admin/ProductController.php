@@ -127,7 +127,6 @@ class ProductController extends Controller
             'options' => 'nullable|array',
             'options.*.option_type' => 'required|string',
             'options.*.option_value' => 'required|string',
-            'images' => 'nullable|array',
             'images.*' => 'image|mimes:jpg,jpeg,png,gif|max:2048',
         ]);
     

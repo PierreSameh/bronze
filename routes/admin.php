@@ -11,7 +11,7 @@ Route::prefix('admin')->group(function () {
     //Auth
     Route::post('/login', [AuthController::class, 'login']);
 
-    // Route::middleware('auth:sanctum')->group(function () {
+    Route::middleware('auth:sanctum')->group(function () {
         //Banners
         Route::apiResource('banners', BannerController::class);
         //Categories
@@ -19,5 +19,5 @@ Route::prefix('admin')->group(function () {
         //Products
         Route::apiResource('products', ProductController::class);
 
-    // });
+    });
 });
