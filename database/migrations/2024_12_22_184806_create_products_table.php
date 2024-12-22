@@ -25,8 +25,6 @@ return new class extends Migration
             $table->integer('quantity');
             $table->text('description_en')->nullable();
             $table->text('description_ar')->nullable();
-            $table->json('other_info_en')->nullable();
-            $table->json('other_info_ar')->nullable();
             $table->timestamps();
         });
     }
