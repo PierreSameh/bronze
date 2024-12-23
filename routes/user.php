@@ -17,12 +17,14 @@ Route::prefix('user')->group(function () {
     Route::post('/forgot-password-check-code', [AuthController::class, "forgetPasswordCheckCode"]);
     Route::post('/forgot-password-set', [AuthController::class,'forgetPassword']);
     Route::post('/login', [AuthController::class, 'login']);
-
+    //GetCities
+    Route::get('/get-cities', [AddressController::class,'getCities']);
     //Products
     Route::get('/products', [ProductController::class, 'index']);
     Route::get('/products/paginate', [ProductController::class, 'paginate']);
     Route::get('/products/{id}', [ProductController::class,'show']);
     Route::get('/reviews/{id}', [ReviewController::class, 'show']);
+    
     Route::middleware('auth:sanctum')->group(function () {
         //AuthController
         Route::get('/ask-email-verfication-code', [AuthController::class, "askEmailCode"]);

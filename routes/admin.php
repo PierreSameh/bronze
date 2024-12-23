@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\PromocodeController;
 use App\Http\Controllers\Admin\ShippingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,5 +32,12 @@ Route::prefix('admin')->group(function () {
         Route::post('/cities/attach-shipping-method', [ShippingController::class, 'attachShippingMethod']);
         Route::put('/cities/{cityId}/update-shipping-method/{shippingMethodId}', [ShippingController::class, 'updateShippingDetails']);
         Route::delete('/cities/{cityId}/detach-shipping-method/{shippingMethodId}', [ShippingController::class, 'detachShippingMethod']);
+        //Promocodes
+        Route::get('/promocodes', [PromocodeController::class, 'index']);
+        Route::get('/promocodes/paginate', [PromocodeController::class, 'paginate']);
+        Route::post('/promocodes', [PromocodeController::class, 'store']);
+        Route::get('/promocodes/{id}', [PromocodeController::class, 'show']);
+        Route::put('/promocodes/{id}', [PromocodeController::class, 'update']);
+        Route::delete('/promocodes/{id}', [PromocodeController::class, 'destroy']);
     });
 });

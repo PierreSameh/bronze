@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Address;
+use App\Models\City;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,7 +20,15 @@ class AddressController extends Controller
             "data"=> $addresses
         ], 200);
      }
- 
+     
+     public function getCities(){
+        $cities = City::all();
+        return response()->json([
+            "success" => true,
+            "message" => "Cities retrieved successfully",
+            "data"=> $cities
+        ], 200);
+     }
      // Store a new address for the authenticated user
      public function store(Request $request)
      {
