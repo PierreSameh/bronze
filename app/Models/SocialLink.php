@@ -14,5 +14,6 @@ class SocialLink extends Model
         'twitter',
         'tiktok',
         'email',
+        'contact_us',
     ];
 }

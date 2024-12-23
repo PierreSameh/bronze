@@ -63,4 +63,16 @@ class User extends Authenticatable
     public function addresses(){
         return $this->hasMany(Address::class);
     }
+
+    public function reviews(){
+        return $this->hasMany(Review::class);
+    }
+
+    public function interacts(){
+        return $this->hasMany(ReviewInteract::class);
+    }
+
+    public function supportMessages(){
+        return $this->hasMany(SupportMessage::class);
+    }
 }

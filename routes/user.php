@@ -5,6 +5,7 @@ use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\ReviewController;
+use App\Http\Controllers\User\SupportMessageController;
 use App\Http\Controllers\User\WishlistController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -51,5 +52,8 @@ Route::prefix('user')->group(function () {
         Route::delete('/reviews/{id}', [ReviewController::class, 'destroy']);
         Route::post('/reviews/{id}/interact', [ReviewController::class, 'interact']);
         Route::delete('/reviews/{id}/interact', [ReviewController::class, 'removeInteract']);
+
+        //Support Messages
+        Route::post('/support-messages', [SupportMessageController::class, 'store']);
     });
 });

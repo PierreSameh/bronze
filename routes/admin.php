@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PromocodeController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\ShippingController;
 use App\Http\Controllers\Admin\SocialLinkController;
+use App\Http\Controllers\Admin\SupportMessageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -49,5 +50,10 @@ Route::prefix('admin')->group(function () {
         //Phone Numbers
         Route::post('/phone-numbers', [PhoneNumberController::class, 'store']);
         Route::delete('/phone-numbers/{id}', [PhoneNumberController::class, 'destroy']);
+        //Support Messages
+        Route::get('/support-messages', [SupportMessageController::class, 'index']);
+        Route::get('/support-messages/paginate', [SupportMessageController::class, 'paginate']);
+        Route::get('/support-messages/{id}', [SupportMessageController::class, 'show']);
+        Route::delete('/support-messages/{id}', [SupportMessageController::class, 'destroy']);
     });
 });

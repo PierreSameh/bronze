@@ -35,6 +35,7 @@ class SocialLinkController extends Controller
             'twitter' => 'nullable|url',
             'tiktok' => 'nullable|url',
             'email' => 'nullable|email',
+            'contact_us' => 'nullable|string'
         ]);
 
         $socialLinks->update($validatedData);
