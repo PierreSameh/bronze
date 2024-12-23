@@ -21,6 +21,10 @@ Route::prefix('user')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     //GetCities
     Route::get('/get-cities', [AddressController::class,'getCities']);
+    //Categories
+    Route::get('/categories', [ProductController::class, 'categories']);
+    Route::get('/category/{id}/products', [ProductController::class, 'byCategory']);
+    Route::get('/category/{id}/products/paginate', [ProductController::class, 'byCategoryPaginate']);
     //Products
     Route::get('/products', [ProductController::class, 'index']);
     Route::get('/products/paginate', [ProductController::class, 'paginate']);
