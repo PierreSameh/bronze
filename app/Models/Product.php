@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Laravel\Sanctum\PersonalAccessToken;
 class Product extends Model
 {
     protected $fillable = [
@@ -21,8 +21,32 @@ class Product extends Model
         'description_en',
         'description_ar',
     ];
-    protected $appends = ['is_new']; // Add this line to append the is_new attribute
+    protected $appends = ['is_new', 'in_wishlist']; // Add this line to append the is_new attribute
 
+    public function getInWishlistAttribute()
+    {
+        $request = request();
+        $user = null;
+
+        // Check if there's a bearer token in the request
+        if ($request->bearerToken()) {
+            // Get user from token
+            $token = PersonalAccessToken::findToken($request->bearerToken());
+            if ($token) {
+                $user = $token->tokenable;
+            }
+        }
+
+        // If no user found, return false
+        if (!$user) {
+            return false;
+        }
+
+        // Check if product is in user's wishlist
+        return $this->wishlist()
+            ->where('user_id', $user->id)
+            ->exists();
+    }
         /**
      * Check if the product is new (created within the last 7 days).
      *
@@ -54,6 +78,10 @@ class Product extends Model
 
     public function cart(){
         return $this->hasMany(Cart::class);
+    }
+
+    public function wishlist(){
+        return $this->hasMany(Wishlist::class);
     }
 
     public function reviews(){
