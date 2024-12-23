@@ -21,8 +21,8 @@ Route::prefix('user')->group(function () {
     //Products
     Route::get('/products', [ProductController::class, 'index']);
     Route::get('/products/paginate', [ProductController::class, 'paginate']);
+    Route::get('/products/{id}', [ProductController::class,'show']);
     Route::get('/reviews/{id}', [ReviewController::class, 'show']);
-
     Route::middleware('auth:sanctum')->group(function () {
         //AuthController
         Route::get('/ask-email-verfication-code', [AuthController::class, "askEmailCode"]);

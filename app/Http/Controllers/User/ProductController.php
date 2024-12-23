@@ -16,7 +16,6 @@ class ProductController extends Controller
             'options',
             'images',
             'info',
-            'cart',
             'reviews' => function ($query) {
                 $query->withCount([
                     'interacts as likes_count' => function ($query) {
@@ -57,7 +56,6 @@ class ProductController extends Controller
             'options',
             'images',
             'info',
-            'cart',
             'reviews' => function ($query) {
                 $query->withCount([
                     'interacts as likes_count' => function ($query) {
@@ -88,6 +86,37 @@ class ProductController extends Controller
             "success" => true,
             "message" => "Products fetched successfully",
             "data" => $products
+        ], 200);
+    }
+
+    public function show($id){
+        $product = Product::with([
+            'category',
+            'options',
+            'images',
+            'info',
+            'reviews' => function ($query) {
+                $query->withCount([
+                    'interacts as likes_count' => function ($query) {
+                        $query->where('interact', 'like');
+                    },
+                    'interacts as dislikes_count' => function ($query) {
+                        $query->where('interact', 'dislike');
+                    }
+                ]);
+            },
+        ])->find($id);
+        if(!$product){
+            return response()->json([
+                "success" => false,
+                "message" => "Product not found",
+            ], 404);
+        }
+
+        return response()->json([
+            "success" => true,
+            "message" => "Product fetched successfully",
+            "data" => $product
         ], 200);
     }
 }
