@@ -24,5 +24,10 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password'=> Hash::make('admin123'),
         ]);
+
+        $this->call([
+            SettingsSeeder::class,
+            SocialLinkSeeder::class
+        ]);
     }
 }

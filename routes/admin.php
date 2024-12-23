@@ -3,9 +3,12 @@
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PhoneNumberController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PromocodeController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\ShippingController;
+use App\Http\Controllers\Admin\SocialLinkController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,5 +42,12 @@ Route::prefix('admin')->group(function () {
         Route::get('/promocodes/{id}', [PromocodeController::class, 'show']);
         Route::put('/promocodes/{id}', [PromocodeController::class, 'update']);
         Route::delete('/promocodes/{id}', [PromocodeController::class, 'destroy']);
+        //MISC pages
+        Route::put('/settings', [SettingsController::class, 'update']);
+        //Social Links
+        Route::put('/social-links', [SocialLinkController::class, 'update']);
+        //Phone Numbers
+        Route::post('/phone-numbers', [PhoneNumberController::class, 'store']);
+        Route::delete('/phone-numbers/{id}', [PhoneNumberController::class, 'destroy']);
     });
 });
