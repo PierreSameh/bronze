@@ -26,7 +26,7 @@ class AddressController extends Controller
         try{
          $validator = Validator::make($request->all(), [
              'receipent_name' => 'required|string|max:255',
-             'City' => 'required|string|max:255',
+             'city_id' => 'required|exists:cities,id',
              'address_one' => 'required|string|max:255',
              'zipcode' => 'required|integer',
              'phone' => 'required|string|max:15',
@@ -74,7 +74,7 @@ class AddressController extends Controller
      {
          $validator = Validator::make($request->all(), [
              'receipent_name' => 'sometimes|string|max:255',
-             'City' => 'sometimes|string|max:255',
+             'city_id' => 'sometimes|exists:cities,id',
              'address_one' => 'sometimes|string|max:255',
              'zipcode' => 'sometimes|integer',
              'phone' => 'sometimes|string|max:15',

@@ -9,7 +9,7 @@ class Address extends Model
     protected $fillable = [
         'user_id',
         'receipent_name',
-        'City',
+        'city_id',
         'district',
         'company',
         'id_number',
@@ -27,5 +27,9 @@ class Address extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function city(){
+        return $this->belongsTo(City::class);
     }
 }
