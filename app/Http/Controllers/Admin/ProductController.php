@@ -26,6 +26,7 @@ class ProductController extends Controller
         // Validate the request
         $validatedData = $request->validate([
             'category_id' => 'required|exists:categories,id',
+            'brand' => 'nullable|string|max:255',
             'name_en' => 'required|string|max:255',
             'name_ar' => 'required|string|max:255',
             'info_en' => 'nullable|string',
@@ -108,6 +109,7 @@ class ProductController extends Controller
     {
         $validatedData = $request->validate([
             'category_id' => 'required|exists:categories,id',
+            'brand' => 'nullable|string|max:255',
             'name_en' => 'required|string|max:255',
             'name_ar' => 'required|string|max:255',
             'info_en' => 'nullable|string',
