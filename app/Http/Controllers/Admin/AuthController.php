@@ -45,4 +45,19 @@ class AuthController extends Controller
         'message'=> "Invalid Credentials",
     ], 401);
 }
+
+public function logout(Request $request) {
+    $user = $request->user();
+
+    if ($user) {
+        if ($user->tokens())
+            $user->tokens()->delete();
+    }
+
+
+    return response()->json([
+        "success"=> true,
+        "message"=> "Logged Out Successfully",
+        ],200);
+}
 }

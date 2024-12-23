@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\ShippingController;
 use App\Http\Controllers\Admin\SocialLinkController;
 use App\Http\Controllers\Admin\SupportMessageController;
+use App\Http\Middleware\AdminCheckMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +18,9 @@ Route::prefix('admin')->group(function () {
     //Auth
     Route::post('/login', [AuthController::class, 'login']);
 
-    Route::middleware('auth:sanctum')->group(function () {
+    Route::middleware(['auth:sanctum', AdminCheckMiddleware::class])->group(function () {
+        //Logout
+        Route::post('/logout', [AuthController::class, 'logout']);
         //Banners
         Route::apiResource('banners', BannerController::class);
         //Categories
