@@ -21,7 +21,17 @@ class Product extends Model
         'description_en',
         'description_ar',
     ];
+    protected $appends = ['is_new']; // Add this line to append the is_new attribute
 
+        /**
+     * Check if the product is new (created within the last 7 days).
+     *
+     * @return bool
+     */
+    public function getIsNewAttribute()
+    {
+        return $this->created_at >= now()->subWeek();
+    }
     /**
      * Get the category associated with the product.
      */

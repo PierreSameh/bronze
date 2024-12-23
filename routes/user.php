@@ -48,5 +48,6 @@ Route::prefix('user')->group(function () {
         Route::put('/reviews/{id}', [ReviewController::class, 'update']);
         Route::delete('/reviews/{id}', [ReviewController::class, 'destroy']);
         Route::post('/reviews/{id}/interact', [ReviewController::class, 'interact']);
+        Route::delete('/reviews/{id}/interact', [ReviewController::class, 'removeInteract']);
     });
 });

@@ -191,6 +191,48 @@ class ReviewController extends Controller
         ]);
     }
 
+    public function removeInteract(Request $request, $id)
+{
+    // Get the authenticated user
+    $user = $request->user();
+
+    // Find the review
+    $review = Review::find($id);
+
+    if (!$review) {
+        return response()->json(['message' => 'Review not found.'], 404);
+    }
+
+    // Check if the user has interacted with this review
+    $existingInteraction = ReviewInteract::where('user_id', $user->id)
+        ->where('review_id', $review->id)
+        ->first();
+
+    if (!$existingInteraction) {
+        return response()->json(['message' => 'No interaction found to remove.'], 404);
+    }
+
+    // Delete the existing interaction
+    $existingInteraction->delete();
+
+    // Recalculate the likes and dislikes count after removing the interaction
+    $review->loadCount([
+        'interacts as likes_count' => function ($query) {
+            $query->where('interact', 'like');
+        },
+        'interacts as dislikes_count' => function ($query) {
+            $query->where('interact', 'dislike');
+        },
+    ]);
+
+    return response()->json([
+        'message' => 'Interaction removed successfully.',
+        'likes_count' => $review->likes_count,
+        'dislikes_count' => $review->dislikes_count,
+    ]);
+}
+
+
     // Update the product's rating based on all the reviews
     private function updateProductRating($productId)
     {
