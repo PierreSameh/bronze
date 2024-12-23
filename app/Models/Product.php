@@ -19,18 +19,6 @@ class Product extends Model
         'quantity',
         'description_en',
         'description_ar',
-        'other_info_en',
-        'other_info_ar',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'other_info_en' => 'array',
-        'other_info_ar' => 'array',
     ];
 
     /**
@@ -55,5 +43,9 @@ class Product extends Model
 
     public function cart(){
         return $this->hasMany(Cart::class);
+    }
+
+    public function reviews(){
+        return $this->hasMany(Review::class);
     }
 }
