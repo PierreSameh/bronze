@@ -23,6 +23,10 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
+        'photo',
+        'birthday',
+        'gender',
+        'city_id',
         'joined_with',
         'type'
     ];
@@ -74,5 +78,9 @@ class User extends Authenticatable
 
     public function supportMessages(){
         return $this->hasMany(SupportMessage::class);
+    }
+
+    public function city(){
+        return $this->belongsTo(City::class);
     }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\User\AddressController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\ProductController;
+use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ReviewController;
 use App\Http\Controllers\User\SupportMessageController;
 use App\Http\Controllers\User\WishlistController;
@@ -30,8 +31,12 @@ Route::prefix('user')->group(function () {
         //AuthController
         Route::get('/ask-email-verfication-code', [AuthController::class, "askEmailCode"]);
         Route::post('/verify-email', [AuthController::class, "verifyEmail"]);
-        Route::post('/change-password', [AuthController::class, "changePassword"]);
         Route::post('/logout', [AuthController::class, "logout"]);
+        //Profile
+        Route::post('/change-password', [ProfileController::class, "changePassword"]);
+        Route::get('/profile/get', [ProfileController::class, "get"]);
+        Route::put('/profile/update', [ProfileController::class, 'update']);
+        Route::delete('/profile/delete', [ProfileController::class, 'deleteAccount']);
         //Wishlist
         Route::get('/wishlist', [WishlistController::class, 'index']);
         Route::post('/wishlist', [WishlistController::class, 'store']);
