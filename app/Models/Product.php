@@ -4,23 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\PersonalAccessToken;
-class Product extends Model
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\HasMedia;
+
+class Product extends Model implements HasMedia
 {
+    use InteractsWithMedia;
+
     protected $fillable = [
-        'category_id',
-        'brand',
-        'name_en',
-        'name_ar',
-        'info_en',
-        'info_ar',
-        'price',
-        'wholesale_price',
-        'sale_percentage',
+        'itemNo',
+        'packQty',
+        'stock',
+        'gmtModified',
         'rate',
-        'quantity',
-        'description_en',
-        'description_ar',
+        'category_id',
+        'group_id',
     ];
+
     protected $appends = ['is_new', 'in_wishlist']; // Add this line to append the is_new attribute
 
     public function getInWishlistAttribute()
@@ -47,7 +47,7 @@ class Product extends Model
             ->where('user_id', $user->id)
             ->exists();
     }
-        /**
+    /**
      * Check if the product is new (created within the last 7 days).
      *
      * @return bool
@@ -64,27 +64,28 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function options(){
+    public function options()
+    {
         return $this->hasMany(ProductOption::class);
     }
 
-    public function images(){
-        return $this->hasMany(ProductImage::class);
+    public function translations()
+    {
+        return $this->hasOne(ProductTranslation::class);
     }
 
-    public function info(){
-        return $this->hasMany(ProductInfo::class);
-    }
-
-    public function cart(){
+    public function cart()
+    {
         return $this->hasMany(Cart::class);
     }
 
-    public function wishlist(){
+    public function wishlist()
+    {
         return $this->hasMany(Wishlist::class);
     }
 
-    public function reviews(){
+    public function reviews()
+    {
         return $this->hasMany(Review::class);
     }
 }

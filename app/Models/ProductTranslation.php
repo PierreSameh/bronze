@@ -4,13 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductOption extends Model
+class ProductTranslation extends Model
 {
     protected $fillable = [
         'product_id',
-        'itemNo',
-        'keywords',
+        'name',
+        'description',
+        'name_ar',
+        'description_ar',
     ];
+
+    public $timestamps = false;
 
     /**
      * Get the product associated with this option.
@@ -18,10 +22,5 @@ class ProductOption extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
-    }
-
-    public function cartOptions()
-    {
-        return $this->hasMany(CartOption::class);
     }
 }
