@@ -20,10 +20,16 @@ class CartController extends Controller
         $cartItems = Cart::with(['product', 'cartOptions.productOption'])
             ->where('user_id', $userId)
             ->get();
+        $cartTotal = 0;
+        foreach($cartItems as $cartItem){
+            $cartItem->total = $cartItem->product->price * $cartItem->quantity;
+            $cartTotal += $cartItem->total;
+        }
 
         return response()->json([
             'message' => 'Cart retrieved successfully',
             'data' => $cartItems,
+            'total' => $cartTotal
         ]);
     }
 
