@@ -3,6 +3,7 @@
 use App\Http\Controllers\User\AddressController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\CartController;
+use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ReviewController;
@@ -64,5 +65,8 @@ Route::prefix('user')->group(function () {
 
         //Support Messages
         Route::post('/support-messages', [SupportMessageController::class, 'store']);
+
+        //Order
+        Route::post('/orders/place-order', [OrderController::class, 'placeOrder']);
     });
 });

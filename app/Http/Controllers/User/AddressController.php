@@ -43,8 +43,8 @@ class AddressController extends Controller
              'company' => 'nullable|string|max:255',
              'id_number' => 'nullable|string|max:255',
              'address_two' => 'nullable|string|max:255',
-             'country' => 'nullable|string|max:255',
-             'email' => 'nullable|email|max:255',
+             'country' => 'required|string|max:255',
+             'email' => 'required|email|max:255',
          ]);
  
          if ($validator->fails()) {
