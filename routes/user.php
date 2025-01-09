@@ -68,5 +68,7 @@ Route::prefix('user')->group(function () {
 
         //Order
         Route::post('/orders/place-order', [OrderController::class, 'placeOrder']);
+        Route::post('/orders/all', [OrderController::class, 'index']);
+        Route::post('/orders/get/{id}', [OrderController::class, 'show']);
     });
 });

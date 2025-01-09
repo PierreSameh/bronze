@@ -64,11 +64,42 @@ class OrderController extends Controller
         }
         // Delete all cart items for the user
         Cart::where('user_id', $user->id)->delete();
-        
+
         // Return response
         return response()->json([
             'message' => 'Order placed successfully',
             'order' => $order,
         ], 200);
     }
+
+    public function index()
+{   
+    $user = auth()->user();
+    $orders = Order::where('user_id', $user->id)
+    ->with(['orderItems.product'])->get();
+
+    return response()->json([
+        'success' => true,
+        'data' => $orders,
+    ]);
+}
+
+public function show($id)
+{
+    $order = Order::with(['orderItems.product'])->find($id);
+
+    if (!$order) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Order not found',
+        ], 404);
+    }
+
+    return response()->json([
+        'success' => true,
+        'data' => $order,
+    ]);
+}
+
+
 }
